@@ -3,7 +3,7 @@
 current_home_path="${HOME}"
 origin_bottle_name="bitspirit"
 public_bottle_name="Deepin-BitSpirit"
-public_bottle_uuid="69459264-9331-4b8b-825f-98cb3d163588"
+public_bottle_uuid="905462dd-bb63-4a6c-b7a9-5bee882923e4"
 desktop_file_categories="internet;"
 deb_package_name="deepinwine-bitspirit"
 deb_version_string="3.6.0.550deepin0"

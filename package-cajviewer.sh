@@ -3,7 +3,7 @@
 current_home_path="${HOME}"
 origin_bottle_name="cajviewer"
 public_bottle_name="Deepin-CAJViewer"
-public_bottle_uuid="6e6d6385-9e9e-4f8c-a3b5-ccf0e7014bbc"
+public_bottle_uuid="155c084b-ff37-4084-949f-f7b25a0ef3c4"
 desktop_file_categories="reading;"
 deb_package_name="deepinwine-cajviewer"
 deb_version_string="7.2.113.0deepin0"
