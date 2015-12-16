@@ -47,7 +47,14 @@ remove_symlinks()
 }
 
 #================main start================
-if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [  -z "$6" ] || [  -z "$7" ] || [  -z "$8" ]; then
+if [ -z "$current_home_path" ] \
+        || [ -z "$origin_bottle_name" ] \
+        || [ -z "$public_bottle_name" ] \
+        || [ -z "$public_bottle_uuid" ] \
+        || [ -z "$desktop_file_categories" ] \
+        || [  -z "$deb_package_name" ] \
+        || [  -z "$deb_version_string" ] \
+        || [  -z "$deb_description" ]; then
 	echo "usage: not enough params"
 	exit 1
 fi
@@ -56,15 +63,6 @@ if [ $UID -ne 0 ]; then # we need su rights
 	echo "Superuser privileges are required to run this script."
 	exit 1
 fi
-
-current_home_path="$1"
-origin_bottle_name="$2"
-public_bottle_name="$3"
-public_bottle_uuid="$4"
-desktop_file_categories="$5"
-deb_package_name="$6"
-deb_version_string="$7"
-deb_description="$8"
 
 if [ ! -d "$current_home_path/.cxoffice/$origin_bottle_name" ]; then # detect the prefix exist
     echo "prefix do not exists"
