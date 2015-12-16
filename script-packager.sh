@@ -38,6 +38,14 @@ correct_desktop_file_categories()
     echo "<==Done."
 }
 
+remove_symlinks()
+{
+    echo "==>remove symlinks..."
+    rm -fv "/opt/cxoffice/bin/nodetool"
+    rm -fv "/opt/cxoffice/bin/tdxw"
+    echo "<==Done."
+}
+
 #================main start================
 if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [  -z "$6" ] || [  -z "$7" ] || [  -z "$8" ]; then
 	echo "usage: not enough params"
@@ -75,6 +83,7 @@ echo -e "deb package version:\t\t$deb_version_string"
 remove_public_bottle
 make_public_bottle
 correct_desktop_file_categories
+remove_symlinks
 make_deb_from_bottle
 remove_public_bottle
 
