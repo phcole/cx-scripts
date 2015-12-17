@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# CrossOver needs following dependencies to build a deb package
+#"dh_builddeb"       => "debhelper",
+#"dpkg-buildpackage" => "dpkg-dev",
+#"fakeroot"          => "fakeroot"
+
 BOTTLE_MANAGER=/opt/cxoffice/bin/cxbottle
 
 remove_public_bottle()
