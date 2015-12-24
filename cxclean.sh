@@ -30,7 +30,12 @@ shutdown_bottle()
 
 clean_gecko()
 {
-    ./gecko-cleaner -bottle="$BottleName"
+    if [ ！ -e "bin/gecko-cleaner" ];then
+        echo "gecko cleaner found, skip."
+        return
+    fi
+    
+    bin/gecko-cleaner -bottle="$BottleName"
 #    /opt/cxoffice/bin/wine --bottle="$BottleName" reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall\{2DA75DC7-0865-4BAD-BA86-074500CC350E}" # 2.24
 #    /opt/cxoffice/bin/wine --bottle="$BottleName" reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall\{43E91AE4-1065-4255-B035-3035D5287CF8}" # 2.40
 #    # remove all old gecko kernels
