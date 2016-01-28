@@ -1,0 +1,8 @@
+--- deb.changelog.old	2015-10-14 23:47:37.000000000 +0800
++++ deb.changelog	2014-12-10 16:20:38.883988691 +0800
+@@ -1,4 +1,4 @@
+-@package_name@ (@package_version@-@release@) unstable; urgency=low
++@package_name@ (@release@) unstable; urgency=low
+ 
+   * New @package_name@ package.
+ 

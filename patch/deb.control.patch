@@ -1,0 +1,12 @@
+--- deb.control.old	2015-10-14 23:47:37.000000000 +0800
++++ deb.control	2016-01-14 11:09:48.175986518 +0800
+@@ -6,6 +6,7 @@
+ Standards-Version: 3.7.3.0
+ 
+ Package: @package_name@
+-Depends: @product_id@5
+-Architecture: all
++Depends: @product_id@5, deepin-crossover
++Architecture: i386
++Multi-Arch: foreign
+ Description:  @description@

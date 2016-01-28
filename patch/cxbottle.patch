@@ -1,0 +1,41 @@
+--- cxbottle.old	2015-10-14 23:47:37.000000000 +0800
++++ cxbottle	2015-12-16 17:43:19.055995971 +0800
+@@ -219,6 +219,7 @@
+ my $opt_force;
+ my $opt_verbose;
+ my $opt_help;
++my $opt_pkgname;
+ require CXOpts;
+ my $cxopts=CXOpts->new();
+ $cxopts->add_options(["create"        => \$opt_create,
+@@ -254,7 +255,8 @@
+                       "scope=s"       => \$opt_scope,
+                       "force"         => \$opt_force,
+                       "verbose!"      => \$opt_verbose,
+-                      "?|h|help"      => \$opt_help
++                      "?|h|help"      => \$opt_help,
++                      "pkgname=s"     => \$opt_pkgname
+                      ]);
+ my $err=$cxopts->parse();
+ CXLog::fdopen(2) if ($opt_verbose);
+@@ -1461,10 +1463,18 @@
+         my $today=CXUtils::rfc822time(time);
+         my $installroot="/opt/$opt_productid/support/$bottle";
+         require CXDebian;
+-        my $package_name=($opt_productid eq CXUtils::get_builtin_product_id() ?
++        my $package_name;
++        if (defined $opt_pkgname)
++        {
++            $package_name = CXDebian::compute_package_name($opt_pkgname);
++        }
++        else
++        {
++            $package_name=($opt_productid eq CXUtils::get_builtin_product_id() ?
+                          "cxbottle" :
+                          "$opt_productid-bottle");
+-        $package_name=CXDebian::compute_package_name("$package_name-$bottle");
++            $package_name=CXDebian::compute_package_name("$package_name-$bottle");
++        }
+ 
+         my $tmpdir=get_tmpdir(cxdirname($ENV{WINEPREFIX}));
+         $buildroot="$tmpdir/cxbottle.$$.buildroot";

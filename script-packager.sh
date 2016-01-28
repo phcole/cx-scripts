@@ -7,6 +7,38 @@
 
 BOTTLE_MANAGER=/opt/cxoffice/bin/cxbottle
 
+detect_apply_patch()
+{
+    tmpfile=`mktemp -t dcpt-XXXXXXXXXXXX`
+    a=`patch --dry-run --forward "$1" "$2" -o"$tmpfile"`
+    if [ "#$?" == "#0" ]; then
+        echo "need apply patch to: $1"
+        sudo patch "$1" "$2"
+    else
+        b=${a##*out of * hunk* }
+        if [ "$b" == "ignored" ]; then
+            :
+        elif [ "$b" == "FAILED" ]; then
+            echo "deb build failed. found expired cx patch: $2"
+            exit 1
+        else
+            echo "unknown error."
+            echo "$b"
+            exit 1
+        fi
+    fi
+    rm $tmpfile
+}
+
+cx_apply_patches()
+{
+    echo "==>check crossover patches..."
+    detect_apply_patch "/opt/cxoffice/bin/cxbottle" "patch/cxbottle.patch"
+    detect_apply_patch "/opt/cxoffice/share/crossover/cxbottle/deb.changelog" "patch/deb.changelog.patch"
+    detect_apply_patch "/opt/cxoffice/share/crossover/cxbottle/deb.control" "patch/deb.control.patch"
+    echo "<==done."
+}
+
 remove_public_bottle()
 {
     if [ -d "/opt/cxoffice/support/$public_bottle_name/" ]; then
@@ -77,6 +109,7 @@ echo "deb package name:         $deb_package_name"
 echo "deb package description:  $deb_description"
 echo "deb package version:      $deb_version_string"
 
+cx_apply_patches
 remove_public_bottle
 make_public_bottle
 correct_desktop_file_categories
