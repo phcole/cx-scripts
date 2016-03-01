@@ -54,13 +54,13 @@ clean_temp()
     purge_dir   "$BottleBase/windows/temp"
     purge_dir   "$BottleBase/windows/Installer"
     purge_dir   "$BottleBase/users/crossover/Temp"
-    purge_dir   "$BottleBase/users/Public/Temp"
     purge_dir   "$BottleBase/users/crossover/Cookies"
     purge_dir   "$BottleBase/users/crossover/Recent"
     remove_file "$BottleBase/users/crossover/Application Data/pcmaster"
     purge_dir   "$BottleBase/users/crossover/Application Data/wine_gecko"
     purge_dir   "$BottleBase/users/crossover/Local Settings/Temporary Internet Files"
     remove_file "$BottleBase/users/phcole"
+    purge_dir   "$BottleBase/users/Public/Temp"
 }
 
 cleanup_aliwangwang()
@@ -166,7 +166,14 @@ cleanup_qq()
     purge_dir   "$BottleBase/users/crossover/Local Settings/Application Data/Tencent/QQPet"
     purge_dir   "$BottleBase/users/Public/Application Data/Tencent/QQPCMgr"
     purge_dir   "$BottleBase/users/Public/Application Data/Tencent/QQProtect"
-    purge_dir   "$BottleBase/Program Files/Common Files/Tencent"
+    remove_file "$BottleBase/Program Files/Common Files/Tencent/Npchrome"
+    remove_file "$BottleBase/Program Files/Common Files/Tencent/QQDownload"
+    remove_file "$BottleBase/Program Files/Common Files/Tencent/QQMiniDL"
+    remove_file "$BottleBase/Program Files/Common Files/Tencent/TXFTN"
+    remove_file "$BottleBase/Program Files/Common Files/Tencent/TXPTOP"
+    remove_file "$BottleBase/Program Files/Common Files/Tencent/TXSSO"
+    remove_file "$BottleBase/Program Files/Tencent/QQGameMicro"
+    remove_file "$BottleBase/Program Files/Tencent/QQGameMicro/QQMusic"
     remove_file "$BottleBase/Program Files/Tencent/QQ/Plugin/Com.Tencent.QQPet/bin/QQPet"
 }
 
@@ -193,7 +200,8 @@ software_cleaner()
 optimize()
 {
     echo "++++optimizing & tweaking..."
-    $WINE_CMD --bottle="$BottleName" -- reg DELETE "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Applets\\Regedit" /v "LastKey" /f 2>&-
+    $WINE_CMD --bottle="$BottleName" -- reg DELETE "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Applets\\Regedit" /v "LastKey" /f
+    $WINE_CMD --bottle="$BottleName" -- reg DELETE "HKCU\\Software\\RuanMei" /f
     sed -i 's#\(C:\\\\windows\\\\system32\\\\winebrowser\(\.exe\)\?\) #\\\"\1\\\" #' "$BottleBase/../system.reg"
     sed -i "s#$USER#crossover#" $BottleBase/../*.reg
 
