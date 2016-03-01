@@ -95,7 +95,8 @@ if [ -z "$origin_bottle_name" ] \
 	exit 1
 fi
 
-if [ ! -d "$HOME/.cxoffice/$origin_bottle_name" ]; then # detect the prefix exist
+# detect the prefix exist
+if [ ! -d "$HOME/.cxoffice/$origin_bottle_name" ]; then
     echo "prefix do not exists"
     exit 1
 fi
@@ -108,6 +109,11 @@ echo "desktop file categories:  $desktop_file_categories"
 echo "deb package name:         $deb_package_name"
 echo "deb package description:  $deb_description"
 echo "deb package version:      $deb_version_string"
+
+# make sure crossover can produce a desktop file for launcher
+if [ ! -d "/etc/xdg/menus/applications-merged" ]; then
+    sudo mkdir "/etc/xdg/menus/applications-merged"
+fi
 
 cx_apply_patches
 remove_public_bottle
