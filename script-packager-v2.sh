@@ -15,6 +15,7 @@ fi
 Bottle_Source_Path="$HOME/.cxoffice/$BOTTLE_SOURCE_NAME"
 Bottle_Public_Path="/opt/cxoffice/support/$BOTTLE_PUBLIC_NAME"
 Bottle_Public_Home_Path="$HOME/.cxoffice/$BOTTLE_PUBLIC_NAME"
+Bottle_Public_Staging_Path="$Staging_Dir/opt/cxoffice/support/$BOTTLE_PUBLIC_NAME"
 
 check_param()
 {
@@ -47,7 +48,8 @@ make_public_bottle()
 	if [ ! -d "/etc/xdg/menus/applications-merged" ]; then
 	    sudo mkdir -p "/etc/xdg/menus/applications-merged"
 	fi
-	sudo $CxOffice_Base/cxbottle --bottle="$BOTTLE_PUBLIC_NAME" --copy="$Bottle_Source_Path" --install --scope=managed --set-uuid="$BOTTLE_PUBLIC_UUID"
+	sudo $CxOffice_Base/cxbottle --bottle="$BOTTLE_PUBLIC_NAME" --copy="$Bottle_Source_Path" \
+		--install --scope=managed --set-uuid="$BOTTLE_PUBLIC_UUID"
 	echo "<== Done."
 }
 
@@ -88,8 +90,9 @@ build_deb_from_public_bottle()
 	echo "<== Done."
 
 	echo "==> Make speical treatments..."
-	find "$Staging_Dir/opt/cxoffice/support/$BOTTLE_PUBLIC_NAME/dosdevices" -type l ! -name "z:" -exec rm -v {} \;
-	find "$Staging_Dir/opt/cxoffice/support/$BOTTLE_PUBLIC_NAME/drive_c/users/crossover/" -type l -exec rm -v {} \;
+	sed -ri "s#(\"(Menu|Assoc|NSPlugin)Mode\" = )\"[^ ]*\"#\1\"frozen\"#" "$Bottle_Public_Staging_Path/cxbottle.conf"
+	find "$Bottle_Public_Staging_Path/dosdevices" -type l ! -name "z:" -exec rm -v {} \;
+	find "$Bottle_Public_Staging_Path/drive_c/users/crossover/" -type l -exec rm -v {} \;
 	find "$Staging_Dir/usr/share/icons/hicolor" -type f -execdir mv {} ${DEB_PACKAGE_NAME}.png \;
 	find "$Staging_Dir/usr/share/applications/" -type f -execdir sed -i "s#Icon=.*#Icon=${DEB_PACKAGE_NAME}#" {} \;
 	find "$Staging_Dir/usr/share/applications/" -type f -execdir sed -i "s#Categories=.*#Categories=${DESKTOP_CATEGORIES}#" {} \;
