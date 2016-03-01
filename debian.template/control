@@ -1,0 +1,14 @@
+Source: @package_name@
+Section: non-free/otherosfs
+Priority: optional
+Maintainer: @packager@
+Build-Depends: debhelper (>= 3.0), fakeroot
+Standards-Version: 3.7.3.0
+
+Package: @package_name@
+Depends: crossover (>=15), deepin-crossover
+Conflicts: @pkg_old_name@
+Provides: @pkg_old_name@
+Architecture: i386
+Multi-Arch: foreign
+Description:  @description@
