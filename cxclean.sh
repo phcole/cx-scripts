@@ -173,7 +173,7 @@ cleanup_qq()
     remove_file "$BottleBase/Program Files/Common Files/Tencent/TXPTOP"
     remove_file "$BottleBase/Program Files/Common Files/Tencent/TXSSO"
     remove_file "$BottleBase/Program Files/Tencent/QQGameMicro"
-    remove_file "$BottleBase/Program Files/Tencent/QQGameMicro/QQMusic"
+    remove_file "$BottleBase/Program Files/Tencent/QQMusic"
     remove_file "$BottleBase/Program Files/Tencent/QQ/Plugin/Com.Tencent.QQPet/bin/QQPet"
 }
 
