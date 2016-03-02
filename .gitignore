@@ -1,2 +1,5 @@
+bin/
+package-specified/
+staging.dir/
+.gitignore
 *.deb
-bin/*
