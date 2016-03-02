@@ -102,10 +102,10 @@ build_deb_from_public_bottle()
 	# call debhelpers to build deb package.
 	fakeroot $Staging_Dir/debian/build $Staging_Dir
 	echo "<== Done."
-	DEB_NAME="${DEB_PACKAGE_NAME}_${DEB_PACKAGE_VERSION}_i386.deb"
-	if [ -f "$Staging_Dir/$DEB_NAME" ]; then
-		mv $Staging_Dir/$DEB_NAME $Base_Dir
-		echo "=== Build deb succeed. deb name: \"$DEB_NAME\""
+	Deb_Name="${DEB_PACKAGE_NAME}_${DEB_PACKAGE_VERSION}_i386.deb"
+	if [ -f "$Staging_Dir/$Deb_Name" ]; then
+		mv $Staging_Dir/$Deb_Name $Base_Dir
+		echo "=== Build deb succeed. deb name: \"$Deb_Name\""
 	fi
 	rm -rf "$Staging_Dir"
 }
