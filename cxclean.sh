@@ -200,8 +200,8 @@ software_cleaner()
 optimize()
 {
     echo "++++optimizing & tweaking..."
-    $WINE_CMD --bottle="$BottleName" -- reg DELETE "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Applets\\Regedit" /v "LastKey" /f
-    $WINE_CMD --bottle="$BottleName" -- reg DELETE "HKCU\\Software\\RuanMei" /f
+    $WINE_CMD --bottle="$BottleName" --wait-children -- reg DELETE "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Applets\\Regedit" /v "LastKey" /f
+    $WINE_CMD --bottle="$BottleName" --wait-children -- reg DELETE "HKCU\\Software\\RuanMei" /f
     sed -i 's#\(C:\\\\windows\\\\system32\\\\winebrowser\(\.exe\)\?\) #\\\"\1\\\" #' "$BottleBase/../system.reg"
     sed -i "s#$USER#crossover#" $BottleBase/../*.reg
 
