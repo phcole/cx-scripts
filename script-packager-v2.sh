@@ -94,8 +94,9 @@ build_deb_from_public_bottle()
 	find "$Bottle_Public_Staging_Path/dosdevices" -type l ! -name "z:" -exec rm -v {} \;
 	find "$Bottle_Public_Staging_Path/drive_c/users/crossover/" -type l -exec rm -v {} \;
 	find "$Staging_Dir/usr/share/icons/hicolor" -type f -execdir mv {} ${DEB_PACKAGE_NAME}.png \;
-	find "$Staging_Dir/usr/share/applications/" -type f -execdir sed -ri "s#(Icon=).*#\1${DEB_PACKAGE_NAME}#" {} \;
-	find "$Staging_Dir/usr/share/applications/" -type f -execdir sed -ri "s#(Categories=).*#\1${DESKTOP_CATEGORIES}#" {} \;
+	find "$Staging_Dir/usr/share/applications/" -type f -execdir mv {} ${DEB_PACKAGE_NAME}.desktop \;
+	sed -ri "s#(Icon=).*#\1${DEB_PACKAGE_NAME}#" "$Staging_Dir/usr/share/applications/${DEB_PACKAGE_NAME}.desktop"
+	sed -ri "s#(Categories=).*#\1${DESKTOP_CATEGORIES}#" "$Staging_Dir/usr/share/applications/${DEB_PACKAGE_NAME}.desktop"
 	echo "<== Done."
 
 	echo "==> Build deb..."
