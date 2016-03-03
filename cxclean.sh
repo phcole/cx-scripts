@@ -142,6 +142,9 @@ cleanup_qq()
     if [ ! -e "$BottleBase/Program Files/Tencent/QQ/Bin/QQ.exe" ];then return;fi
 
     echo "++++QQ detected. cleaning..."
+    if [ -f "$BottleBase/Program Files/Tencent/QQMusic/QzoneMusicUninst.exe" ]; then
+        $WINE_CMD --bottle="$BottleName" --wait-children -- "c:/Program Files/Tencent/QQMusic/QzoneMusicUninst.exe" /S
+    fi
     purge_dir   "$BottleBase/users/crossover/Application Data/Tencent/AndroidAssist"
     purge_dir   "$BottleBase/users/crossover/Application Data/Tencent/AndroidServer"
     purge_dir   "$BottleBase/users/crossover/Application Data/Tencent/DeskUpdate"
@@ -173,9 +176,6 @@ cleanup_qq()
     remove_file "$BottleBase/Program Files/Common Files/Tencent/TXPTOP"
     remove_file "$BottleBase/Program Files/Common Files/Tencent/TXSSO"
     remove_file "$BottleBase/Program Files/Tencent/QQGameMicro"
-    if [ -f "$BottleBase/Program Files/Tencent/QQMusic/QzoneMusicUninst.exe" ]; then
-        $WINE_CMD --bottle="$BottleName" --wait-children -- "c:/Program Files/Tencent/QQMusic/QzoneMusicUninst.exe" /S
-    fi
     remove_file "$BottleBase/Program Files/Tencent/QQMusic"
     remove_file "$BottleBase/Program Files/Tencent/QQ/Plugin/Com.Tencent.QQPet/bin/QQPet"
 }
@@ -230,10 +230,10 @@ if [ ! -e "${HOME}/.cxoffice/$BottleName/cxbottle.conf" ]; then
     exit 3
 fi
 
-clean_gecko
-clean_temp
 software_cleaner
 optimize
+clean_gecko
+clean_temp
 shutdown_bottle
 
 exit 0
