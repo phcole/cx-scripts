@@ -97,6 +97,9 @@ build_deb_from_public_bottle()
 	find "$Staging_Dir/usr/share/applications/" -type f -execdir mv {} ${DEB_PACKAGE_NAME}.desktop \;
 	sed -ri "s#(Icon=).*#\1${DEB_PACKAGE_NAME}#" "$Staging_Dir/usr/share/applications/${DEB_PACKAGE_NAME}.desktop"
 	sed -ri "s#(Categories=).*#\1${DESKTOP_CATEGORIES}#" "$Staging_Dir/usr/share/applications/${DEB_PACKAGE_NAME}.desktop"
+	if [ ! -z "$APP_MAIN_EXE" ]; then
+		echo -e \"StarupWMClass=${APP_MAIN_EXE}\" 1>> "$Staging_Dir/usr/share/applications/${DEB_PACKAGE_NAME}.desktop"
+	fi
 	echo "<== Done."
 
 	echo "==> Build deb..."
@@ -126,6 +129,7 @@ echo "package old name:        \"$DEB_PACKAGE_OLD_NAME\""
 check_param "$DESKTOP_CATEGORIES"       "desktop file categories: " "desktop file categories not given."
 echo "package maintainer:      \"$DEB_PACKAGER\""
 echo "package date:            \"$DEB_PACKAGE_DATE\""
+echo "package main executable: \"$APP_MAIN_EXE\""
 
 ./cxclean.sh "$BOTTLE_SOURCE_NAME"
 
