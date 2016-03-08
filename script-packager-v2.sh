@@ -98,7 +98,7 @@ build_deb_from_public_bottle()
 	sed -ri "s#(Icon=).*#\1${DEB_PACKAGE_NAME}#" "$Staging_Dir/usr/share/applications/${DEB_PACKAGE_NAME}.desktop"
 	sed -ri "s#(Categories=).*#\1${DESKTOP_CATEGORIES}#" "$Staging_Dir/usr/share/applications/${DEB_PACKAGE_NAME}.desktop"
 	if [ ! -z "$APP_MAIN_EXE" ]; then
-		echo -e \"StarupWMClass=${APP_MAIN_EXE}\" 1>> "$Staging_Dir/usr/share/applications/${DEB_PACKAGE_NAME}.desktop"
+		echo "StarupWMClass=${APP_MAIN_EXE}" 1>> "$Staging_Dir/usr/share/applications/${DEB_PACKAGE_NAME}.desktop"
 	fi
 	echo "<== Done."
 
