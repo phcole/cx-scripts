@@ -23,7 +23,12 @@ check_param()
 		echo "$3"
 		exit 1
 	fi
-	echo "$2\"$1\""
+	echo -e "$2\"\033[31m$1\033[0m\""
+}
+
+echo_param()
+{
+	echo -e "$2\"\033[31m$1\033[0m\""
 }
 
 remove_public_bottle()
@@ -125,11 +130,11 @@ check_param "$BOTTLE_PUBLIC_UUID"       "public bottle uuid:      " "public bott
 check_param "$DEB_PACKAGE_NAME"         "package name:            " "package name not given."
 check_param "$DEB_PACKAGE_VERSION"      "package version:         " "package version not given."
 check_param "$DEB_PACKAGE_DESCRIPTION"  "package description:     " "package description not given."
-echo "package old name:        \"$DEB_PACKAGE_OLD_NAME\""
+echo_param  "$DEB_PACKAGE_OLD_NAME"     "package old name:        "
 check_param "$DESKTOP_CATEGORIES"       "desktop file categories: " "desktop file categories not given."
-echo "package maintainer:      \"$DEB_PACKAGER\""
-echo "package date:            \"$DEB_PACKAGE_DATE\""
-echo "package main executable: \"$APP_MAIN_EXE\""
+echo_param  "$DEB_PACKAGER"             "package maintainer:      "
+echo_param  "$DEB_PACKAGE_DATE"         "package date:            "
+echo_param  "$APP_MAIN_EXE"             "package main executable: "
 
 make
 ./cxclean.sh "$BOTTLE_SOURCE_NAME"
