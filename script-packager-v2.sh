@@ -131,6 +131,7 @@ echo "package maintainer:      \"$DEB_PACKAGER\""
 echo "package date:            \"$DEB_PACKAGE_DATE\""
 echo "package main executable: \"$APP_MAIN_EXE\""
 
+make
 ./cxclean.sh "$BOTTLE_SOURCE_NAME"
 
 remove_public_bottle
