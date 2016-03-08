@@ -1,17 +1,16 @@
 SOURCE = src
 BUILD = bin
 
-all: gecko_cleaner
+all: out_dir $(BUILD)/gecko-cleaner
 
-
-gecko_cleaner: out_dir $(SOURCE)/gecko-cleaner.go
-	go build -o $(BUILD)/gecko-cleaner -ldflags "-s -w" $(SOURCE)/gecko-cleaner.go
-	strip -s $(BUILD)/gecko-cleaner
+$(BUILD)/gecko-cleaner: $(SOURCE)/gecko-cleaner.go
+	go build -o $@ -ldflags "-s -w" $^
+	strip -s $@
 
 .PHONY: out_dir clean
 
 out_dir:
-	@if [ ! -d $(BUILD) ]; then mkdir -p $(BUILD); fi
+	@if [ ! -d "$(BUILD)" ]; then mkdir -p $(BUILD); fi
 
 clean:
 	rm $(BUILD)/*
