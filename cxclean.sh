@@ -59,7 +59,7 @@ clean_temp()
     remove_file "$BottleBase/users/crossover/Application Data/pcmaster"
     purge_dir   "$BottleBase/users/crossover/Application Data/wine_gecko"
     purge_dir   "$BottleBase/users/crossover/Local Settings/Temporary Internet Files"
-    remove_file "$BottleBase/users/phcole"
+    remove_file "$BottleBase/users/${USER}"
     purge_dir   "$BottleBase/users/Public/Temp"
 }
 
@@ -77,8 +77,8 @@ cleanup_aliworkbench()
     if [ ! -e "$BottleBase/Program Files/AliWorkbench/AliWorkbench.exe" ];then return;fi
 
     echo "++++AliWorkbench detected. cleaning..."
+    remove_file "$BottleBase/users/Public/Documents/AliWorkbench/System"
     purge_dir   "$BottleBase/users/crossover/Local Settings/Application Data/aef/"
-    purge_dir   "$BottleBase/users/Public/Documents/AliWorkbench/"
 }
 
 cleanup_flash()
@@ -110,17 +110,17 @@ cleanup_foobar2000()
 
 cleanup_mailmaster()
 {
-    if [ ! -e "$BottleBase/MailMaster/MailMaster.exe" ];then return;fi
+    if [ ! -e "$BottleBase/Program Files/Netease/MailMaster/MailMaster.exe" ];then return;fi
 
     echo "++++MailMaster detected. cleaning..."
-    remove_file "$BottleBase/MailMaster/account"
-    remove_file "$BottleBase/MailMaster/address"
-    remove_file "$BottleBase/MailMaster/tmp"
-    remove_file "$BottleBase/MailMaster/UpdateTemp"
-    remove_file "$BottleBase/MailMaster/applog.txt"
-    remove_file "$BottleBase/MailMaster/netlog.txt"
-    remove_file "$BottleBase/MailMaster/global.cfg"
-    remove_file "$BottleBase/MailMaster/schd.sdb"
+    remove_file "$BottleBase/Program Files/Netease/MailMaster/account"
+    remove_file "$BottleBase/Program Files/Netease/MailMaster/address"
+    remove_file "$BottleBase/Program Files/Netease/MailMaster/tmp"
+    remove_file "$BottleBase/Program Files/Netease/MailMaster/UpdateTemp"
+    remove_file "$BottleBase/Program Files/Netease/MailMaster/applog.txt"
+    remove_file "$BottleBase/Program Files/Netease/MailMaster/netlog.txt"
+    remove_file "$BottleBase/Program Files/Netease/MailMaster/global.cfg"
+    remove_file "$BottleBase/Program Files/Netease/MailMaster/schd.sdb"
 }
 
 cleanup_nativeie()
