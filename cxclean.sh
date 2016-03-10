@@ -188,6 +188,16 @@ cleanup_qqdownload()
     purge_dir   "$BottleBase/users/crossover/Application Data/Tencent/QQDownload"
 }
 
+cleanup_qqeim()
+{
+    if [ ! -e "$BottleBase/Program Files/Tencent/QQEIM/Bin/QQEIM.exe" ];then return;fi
+
+    echo "++++QQEIM detected. cleaning..."
+    purge_dir   "$BottleBase/users/crossover/Application Data/Tencent/Logs"
+    purge_dir   "$BottleBase/users/crossover/Application Data/Tencent/QQEIM/STemp"
+    purge_dir   "$BottleBase/users/crossover/Application Data/Tencent/TXSSO"
+}
+
 software_cleaner()
 {
     cleanup_aliwangwang
@@ -198,6 +208,7 @@ software_cleaner()
     cleanup_nativeie
     cleanup_qq
     cleanup_qqdownload
+    cleanup_qqeim
 }
 
 optimize()
